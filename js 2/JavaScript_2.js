@@ -38,23 +38,21 @@
 
 // console.log(`Start station is ${stops[0]}`);
 let stops = ["Санкт-Петербург", "Редкино", "Лихоборы", "Москва", "Арзамас-1", "Саранск-1"];
-let timeOuterInterval = [0, 5780, 2140, 300, 6520, 3400];
-let timeOuterStops = [680, 700, 240, 520, 600, 780];
-
-function way(stops, timeOuterInterval, timeOuterStops, i = 0) {
+let timeOuterInterval = [0, 5780, 680+2140,700+300,240+6520,520+3400];
+let date = new Date(2024, 3, 15, 17, 14, 35);
+let new_date = null;
+function way(stops, timeOuterInterval, i = 0) {
     if (i < stops.length) {
         setTimeout(() => {
-            console.log(`Поезд прибыл в ${stops[i]}`);
-            setTimeout(() => {
-                console.log(`Остановка: ${timeOuterStops[i]/20} мин`);
-                way(stops, timeOuterInterval, timeOuterStops, i += 1);
-                
-            }, timeOuterStops[i]);
+            new_date = new Date(date.getTime() + timeOuterInterval[i]);
+            console.log(`Поезд прибыл в ${stops[i]}`, `(${new_date.getHours()}:${new_date.getMinutes()}:${new_date.getSeconds()})`);
+            way(stops, timeOuterInterval, i + 1);
         }, timeOuterInterval[i]);
     }
 }
 
-way(stops, timeOuterInterval, timeOuterStops);
+way(stops, timeOuterInterval);
+
 
 // function way(stops, timeOuterInterval, timeOuterStops) {
 //     for (let i = 0; i < stops.length; i++) {
