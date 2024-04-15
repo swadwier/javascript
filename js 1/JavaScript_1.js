@@ -30,8 +30,7 @@ function unit(quantity) {
       };
   
       units.push(function () {
-        return `
-        number ${unit.n}
+        return `Номер юнита: ${unit.n}
         hp ${unit.hp} 
         armor ${unit.armor} 
         attack ${unit.attack}`;
@@ -42,90 +41,79 @@ function unit(quantity) {
     
   }
   
-  unit(5).forEach(el => {
-    console.log(el());
-    
-  });
+quantity = prompt('Введите количество юнитов в армиии');
+
+if ((!isNaN(quantity)) && (quantity > 0)){
+    unit(quantity).forEach(el => {
+        console.log(el());
+    });
+} else {
+    console.log('Неверный ввод');
+}
 
 
-  
-/*
+
 function ToDoList() {
-
-    let tasksList = [];
+    let answer = '';
+    const tasksList = [];
     let i = 0;
 
     function createTask() {
         i += 1;
-        let text = prompt("Введите текст задачи:");
-        let stat = "активная";
 
+        let text = prompt("Введите текст задачи:")
         let task = {
             n: i,
             text: text,
-            stat: stat,
+            status: 'активная',
         };
-        tasksList.push(task);
-        console.log(`Задача "${task.text}" добавлена`);
+
+        if (text.trim() !== ''){
+            tasksList.push(task);
+            answer = `Задача ${task.n} - ${task.text} добавлена`;
+        } else{
+            answer = 'Отсутсвует текст задачи. Задача не добавлена';
+        }
+
+        return answer;
+        }
+
+    function done(n = prompt('Введите номер задачи')) {
+        let tasks = tasksList.find(task => task.n == n);
+        if (!(tasks == undefined)) {
+            tasks.status = 'завершенная';
+            answer = `Задача ${tasks.n} - ${tasks.text} выполнена`;
+        } else {
+            answer = `Задача не найдена`;
+        }
+        return answer;
     }
 
-    function done() {
-        let num = prompt("Введите номер завершённой задачи");
-        tasksList.forEach(task => {
-            if (task.n == num) {
-                task.stat = 'завершённая';
-                console.log(`Задача "${task.text}" успешно завершена`);
-            }
-        });
-    }
-
-    function deleted() {
-        let num = prompt("Введите номер задачи, которую хотите удалить");
-        let reason = prompt("Причина удаления");
-        tasksList.forEach((task, i) => {
-            if (task.n == num) {
-                task.stat = 'удаленная';
-                tasksList.splice(i, 1);
-                console.log(`Задача "${task.text}" успешно удалена`);
-                if (reason) {
-                    console.log(`Причина удаления: ${reason}`);
-                }
-            }
-        });
+    function deleted(n = prompt('Введите номер задачи')) {
+        const index = tasksList.findIndex(task => task.n == n && task.status == 'завершенная');
+        if (index !== -1) {
+            tasksList[index].status = 'удаленная';
+            answer = `Задача ${n} удалена`;
+        } else {
+            answer = `Задача ${n} не может быть удалена`;   
+        }
+        return answer;
     }
 
     function activeList() {
-        console.log("Активные задачи:");
-        tasksList.forEach(task => {
-            if (task.stat === 'активная') {
-                console.log(`Задача №${task.n} - ${task.text}, ${task.stat}`);
-            }
-        });
+        return tasksList.filter(task => task.status == 'активная');
     }
 
     function doneList() {
-        console.log("Завершенные задачи:");
-        tasksList.forEach(task => {
-            if (task.stat === 'завершённая') {
-                console.log(`Задача №${task.n} - ${task.text}, ${task.stat}`);
-            }
-        });
+        return tasksList.filter(task => task.status == 'завершенная');
     }
 
     function deletedList() {
-        console.log("Удалённые задачи:");
-        tasksList.forEach(task => {
-            if (task.stat === 'удаленная') {
-                console.log(`Задача №${task.n} - ${task.text}, ${task.stat}`);
-            }
-        });
+        return tasksList.filter(task => task.status == 'удаленная');
     }
 
     function allTasks() {
-        console.log("Все задачи:");
-        tasksList.forEach(task => (console.log
-            (`Задача №${task.n} - ${task.text}, ${task.stat}`)));
-        // console.log(tasksList);
+        return tasksList;
     }
 
     return [
@@ -146,25 +134,49 @@ let index = prompt("Выберите действие:\n(1)- Добавить з
 
 switch(index){
     case '1':
-        toDoList[0](); // Добавить задачу
+        console.log(toDoList[0]()); // Добавить задачу
         break;
     case '2':
-        toDoList[1](); // Отметить задачу завершённой
+        console.log(toDoList[1]()); // Отметить задачу завершённой
         break;
     case '3':
-        toDoList[2](); // Удалить завершенную задачу
+        console.log(toDoList[2]()); // Удалить завершенную задачу
         break;
     case '4':
-        toDoList[3](); // Вывести список активных задач
+        console.log("Активные задачи:");
+        toDoList[3]().forEach(task => {
+        console.log
+        (`№${task.n} 
+${task.text}
+${task.status}`);
+    });
         break;
     case '5':
-        toDoList[4](); // Вывести список завершенных задач
+        console.log("Завершенные задачи:");
+        toDoList[4]().forEach(task => {
+        console.log
+        (`№${task.n} 
+${task.text}
+${task.status}`);
+        }); 
         break;
     case '6':
-        toDoList[5](); // Вывести все задачи
+        console.log("Удалённые задачи:");
+        toDoList[5]().forEach(task => {
+        console.log
+        (`№${task.n} 
+${task.text}
+${task.status}`);
+        }); 
         break;
     case '7':
-        toDoList[6]();
+        console.log("Все задачи:");
+        toDoList[6]().forEach(task => {
+        console.log
+        (`№${task.n} 
+${task.text}
+${task.status}`);
+        }); 
         break;
     case '0':
         console.log("Работа c программой завершена");
@@ -194,6 +206,6 @@ switch(index){
 // Все функции по задачам должны быть реализованы таким образом, что позволяют получить
 // входные данные, или вывести результат работы функции, через интерфейс взаимодействия с
 // пользователем (prompt, alert) либо через консоль браузера.
-*/
+
 
  
