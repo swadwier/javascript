@@ -12,7 +12,42 @@
 // Параметры 2-4 являются случайными величинами 1-100. Заполнение информации об юните
 // происходит вне функции, возвращающей информацию по юниту. 
 
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
+
+function unit(quantity) {
+    let units = [];
+
+    for (let i = 0; i < quantity; i++) {
+  
+      let unit = {
+        n: i + 1,
+        hp: getRandom(1, 100),
+        armor: getRandom(1, 100),
+        attack: getRandom(1, 100),
+      };
+  
+      units.push(function () {
+        return `
+        number ${unit.n}
+        hp ${unit.hp} 
+        armor ${unit.armor} 
+        attack ${unit.attack}`;
+      });
+  
+    }
+    return units;
+    
+  }
+  
+  unit(5).forEach(el => {
+    console.log(el());
+    
+  });
+
+/*
 function ToDoList() {
 
     let tasksList = [];
@@ -157,6 +192,6 @@ switch(index){
 // Все функции по задачам должны быть реализованы таким образом, что позволяют получить
 // входные данные, или вывести результат работы функции, через интерфейс взаимодействия с
 // пользователем (prompt, alert) либо через консоль браузера.
-
+*/
 
  
