@@ -37,10 +37,9 @@
 // }
 
 // console.log(`Start station is ${stops[0]}`);
-let stops = ["Санкт-Петербург", "Редкино", "Лихоборы", "Москву", "Арзамас-1", "Саранск-1"];
-let timeOuterInterval = [0, 5780, 2140, 300, 6520, 3400]
-let timeOuterStops = [680, 700, 240, 520]
-
+let stops = ["Санкт-Петербург", "Редкино", "Лихоборы", "Москва", "Арзамас-1", "Саранск-1"];
+let timeOuterInterval = [0, 5780, 2140, 300, 6520, 3400];
+let timeOuterStops = [680, 700, 240, 520, 600, 780];
 
 function way(stops, timeOuterInterval, timeOuterStops, i = 0) {
     if (i < stops.length) {
@@ -48,9 +47,9 @@ function way(stops, timeOuterInterval, timeOuterStops, i = 0) {
             console.log(`Поезд прибыл в ${stops[i]}`);
             setTimeout(() => {
                 console.log(`Остановка: ${timeOuterStops[i]/20} мин`);
-                way(stops, timeOuterInterval, timeOuterStops, i + 1);
+                way(stops, timeOuterInterval, timeOuterStops, i += 1);
                 
-            }, timeOuterInterval[i]);
+            }, timeOuterStops[i]);
         }, timeOuterInterval[i]);
     }
 }
