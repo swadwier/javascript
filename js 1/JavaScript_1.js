@@ -47,9 +47,8 @@ function unit(quantity) {
     
   });
 
-///hgkjsdfhksdhf
 
-//f
+  
 /*
 function ToDoList() {
 
