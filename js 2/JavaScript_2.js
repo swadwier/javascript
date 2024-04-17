@@ -12,11 +12,11 @@
 // // 1.Редкино* 22:03 34 мин 22:37  680 мс
 // // 1 час 47 минут (по расписанию) 2140 мс
 // // 2.Лихоборы (техническая)* 00:24 35 мин 00:59 700 мс
-// // 15 минут (с увеличенным скоостным режимом) 300 мс
+// // 15 минут (по расписанию) 300 мс
 // // 3.Москва (Восточный вокзал) 01:14 12 мин 01:26 240 мс
 // // 5 часов 26 минут (по расписанию) 6 520 мс
 // // 4.Арзамас-1 06:52 26 мин 07:18 520 мс
-// // 2 часа 50 минут (с опозданием) 3400 мс
+// // 2 часа 50 минут (по расписанию) 3400 мс
 // // -.Саранск-1 10:08 30 мин 10:38
 
 // // Временной масштаб симуляции: 1200мс:1ч.
@@ -31,48 +31,27 @@
 // // *) вариация: движутся несколько поездов. Alert выводить общий по всем поездам.
 
 
-// function stations(stations){
-//     counter = i++;
-//     return stations[counter];
-// }
 
-// console.log(`Start station is ${stops[0]}`);
 let stops = ["Санкт-Петербург", "Редкино", "Лихоборы", "Москва", "Арзамас-1", "Саранск-1"];
 let timeOuterInterval = [0, 5780, 680+2140,700+300,240+6520,520+3400];
 let date = new Date(2024, 3, 15, 17, 14, 35);
-let new_date = null;
+// let way_label = {}
+
 function way(stops, timeOuterInterval, i = 0) {
     if (i < stops.length) {
         setTimeout(() => {
-            new_date = new Date(date.getTime() + timeOuterInterval[i]);
-            console.log(`Поезд прибыл в ${stops[i]}`, `(${new_date.getHours()}:${new_date.getMinutes()}:${new_date.getSeconds()})`);
+            let minutes = date.getMinutes()+(timeOuterInterval[i]/20);
+            date.setMinutes(minutes);
+            // way_label[stops[i]] = date.toLocaleTimeString('it-IT');
+            console.log(`Поезд прибыл в ${stops[i]}`, `(${date.toLocaleTimeString('it-IT')})`, 'скоростной режим - по расписанию');
             way(stops, timeOuterInterval, i + 1);
         }, timeOuterInterval[i]);
     }
 }
 
 way(stops, timeOuterInterval);
-
-
-// function way(stops, timeOuterInterval, timeOuterStops) {
-//     for (let i = 0; i < stops.length; i++) {
-//         setTimeout(() => console.log(`Поезд прибыл в ${stops[i]}`), timeOuterInterval[i]);
-//     }
-//   }
-
-// console.log(way(stops, timeOuterInterval, timeOuterStops));
-
-
-
-// function way(){
-//     for i
-// }
-
-// let nextStation = setTimeout (()=>  console.log(`Поезд прибыл в ${stops[0]}`), 5780);
-
-
-
-
+alert(`Результат - поездка по расписанию`)
+    
 
 
 
