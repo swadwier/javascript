@@ -444,13 +444,13 @@
 console.log(Date.now());
 
 
-// const res = setInterval(() => {
+// const res = setinterval(() => {
 //     date = new Date();
 //     console.log
 //     (`${date.getHours()}:${date.getMinutes()}:${date.getSeconds() < 10 ? '0' + date.getSeconds(): date.getSeconds()}`);
 // }, 1000);
 
-// clearInterval(res); //остановить таймер
+// clearinterval(res); //остановить таймер
 // date.getDate(), date.getMonth() + 1, date.getFullYear(), 
 
 let res = setTimeout(function timer() {
